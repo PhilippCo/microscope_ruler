@@ -27,7 +27,7 @@ def click(event, x,y, flags, param):
 
         elif mode == 1: #select 2. point to measure
             measured = distance(startp, point) * scale
-            print("Abstand", measured)
+            print("Distance: {0:0.3f}mm".format(measured))
             mode = 0
 
         elif mode == 3: #select 1. point to calibrate
@@ -40,8 +40,8 @@ def click(event, x,y, flags, param):
             measured_distance = distance(startp, point)
             scale = real_distance / measured_distance
             measured = measured_distance * scale
-            print("Distance: ", measured)
-            print("Scale: ", scale)
+            print("Distance: {0:0.3f}mm".format(measured))
+            print("Scale: {0:0.4f} mm/pixel".format(scale))
             mode = 0 #calibration done
 
             
@@ -59,8 +59,7 @@ while (True):
     stream = cv2.waitKey(1)
     ret,frame = cap.read()
 
-    if mode == 0:
-        cv2.line(frame, startp, point, (0, 0, 255), thickness=3)
+    cv2.line(frame, startp, point, (0, 0, 255), thickness=3)
     
     font = cv2.FONT_HERSHEY_SIMPLEX
     org = (10, 30)
